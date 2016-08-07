@@ -1,12 +1,12 @@
 /*
- * Program: warmup.cpp
- * --------------------
- * Program used to generate a hash code based on user's name.
- * As given, this code has two compiler errors you need to track down 
- * and fix in order to get the program up and running.
- *
- * jzelenski Thu Apr  1 12:27:53 PST 2004
- */
+ Program: warmup.cpp
+
+ Program used to generate a hash code based on user's name.
+ As given, this code has two compiler errors you need to track down 
+ and fix in order to get the program up and running.
+ 
+ jzelenski Thu Apr  1 12:27:53 PST 2004
+*/
 
 #include <iostream>
 #include "console.h"
@@ -24,13 +24,13 @@ int Hash(string s, int maxCode);
 
 
 /*
- * Function: Hash
- * Usage: hash_number = Hash(key, max_hash);
- * -----------------------------------------
- * This function takes the key and uses it to derive a hash code,
- * which is an integer in the range [0, maxCode - 1].  The hash
- * code is computed using a method called linear congruence.
- */
+ Function: Hash
+ Usage: hash_number = Hash(key, max_hash);
+ 
+ This function takes the key and uses it to derive a hash code,
+ which is an integer in the range [0, maxCode - 1].  The hash
+ code is computed using a method called linear congruence.
+*/
 #define Multiplier -1664117991L     // Multiplier used in Hash function
 
 int Hash(string s, int maxCode)
