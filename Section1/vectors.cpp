@@ -15,12 +15,13 @@ void countLetters() {
 
     in.open("data/letters.txt");
     if (in.fail()) error("Could not open files.");
+    in.clear() // clear error state
 
     int num;
     while(true) {
         num = in.get(); // @ToDo single; formated stream input; line by line
         if (in.fail()) break;
-        if ((num >= 'A' && num <= 'Z') || (num >= 'a' && num <= 'z')) {
+        if (isalpha(num)) {
             num = tolower(num);
             alphabet[num-'a'] += 1 ;
         }

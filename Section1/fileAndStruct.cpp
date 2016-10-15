@@ -1,4 +1,4 @@
-#include <iostream> // for ifstream, ofstream
+#include <iostream> // for cin, cout
 #include "console.h"
 #include "gwindow.h" // for GWindow
 #include "simpio.h"  // for getLine
@@ -18,6 +18,7 @@ int main() {
 
     in.open("data/MidtermScores.txt");
     if (in.fail()) error("Could not open file.");
+    in.clear(); // clear error state
 
     int num;
     int min, max, cnt, result;
