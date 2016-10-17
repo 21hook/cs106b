@@ -23,7 +23,7 @@
 
         while(true) {
             // Get a n for calculate the sum of 1 to n
-            if (/*sentianl*/) break; // Stop to the loop of calculation
+            if (/*sentianl*///) break; // Stop to the loop of calculation
             /* Gauss Formula: (1+n) * n/2
              * Calculate the sum of 1 to n
              * Display the sum

@@ -24,8 +24,15 @@ int main() {
     getInteger("It take up the another line.");
 
     /*
-     * deduction:
-     *      simio.h create a new line after user input
+     * corollary:
+     *     The shell create a new line after user input
+     *     
+     *     |
+     *     v
+     * coclusion: standard IO newlines(must create explicitly)
+     *     1 shell 
+     *     2 endl
+     * 
      */
     cout << "The first line occupies a new line, but, the cout does not create a another new line." << endl;
     cout << "It take up the same line as the preceeding line."; << endl;
