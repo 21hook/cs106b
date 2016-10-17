@@ -1,96 +1,120 @@
-#include <iostream>
-#include "gwindow.h"
+#include <iostream> 
 #include "simpio.h"
-#include "error.h"
-#include "vector.h"
-#include <cctype>
-#include <stdio.h>
+#include <cctype> 
+#include "vector.h" 
+#include "gwindow.h"
 
 using namespace std;
 
-Vector<string> table;
 
-void initTable(Vector<string> &vec);
-string soundexCode(string str);
-string convertToCode(char s, Vector<string> &vec);
+void initialTable(Vector<string> &table);
+void readName(string &name);
+void convertToCode(string &name, string &code, Vector<string> &table);
+void findDuplicateCode(string &code);
+void removeAny0(string &code);
+void makeCodeLength4(string &code);
+void displayName(string &name, string &code);
 
 int main()
 {
-    string surname = "";
+    string name = ""; 
+    string code = "";
+    Vector<string> table;
 
-
-    initTable(table);
+    initialTable(table);
 
     while(true) {
-        //cout << "Enter surname (RETURN to quit): ";
-        //cin >> surname;
-        surname = getLine("Enter surname (RETURN to quit): ");
-        if (surname == "") break; // return -> send string, \n
-        cout << "The hash code for your name is " << soundexCode(surname) << endl;
+        readName(name);
+        if(name == "") break;
+        convertToCode(name, code, table);
+        findDuplicateCode(code);
+        removeAny0(code);
+        makeCodeLength4(code = name[0] + code); 
+        displayName(name, code);
     }
+
     return 0;
 }
 
-/* Construct a map between chars & code(0,1,2,3,...) */
-void initTable(Vector<string> &vec) {
-    vec.add("AEIOUHWY");
-    vec.add("BFPV");
-    vec.add("CGJKQSXZ");
-    vec.add("DT");
-    vec.add("MN");
-    vec.add("L");
-    vec.add("R");
+void initialTable(Vector<string> &table) {
+    table.add("AEIOUHWY");
+    table.add("BFPV");
+    table.add("CGJKQSXZ");
+    table.add("DT");
+    table.add("MN");
+    table.add("L");
+    table.add("R");
 }
 
-/* Convert str to code except for the first char of str */
-string soundexCode(string str) {
-    //char firstLetter = char(str[0]);
-
-    //string code = to_string(str[0]);// std::toupper(), std::to_string()
-    string code = to_string(str.at(0));
-
-    for(int i=1; i<str.length(); i++) {
-        if(isalpha(str[i]))
-            code += convertToCode(str[i], table); // @TODO nest function
-    }
-
-    /** Remove cosective duplicate code;
-        Remove 0s
-    */
-    for(int j=1; j<code.length(); j++) {
-        if(code[j] == code[j-1] || code[j] == 0) code.erase(j);
-    }
-
-    while(code.length() <4) {
-        code += "0";
-    }
-
-
-    if(code.length() > 4) code = code.substr(0, 4);
-
-
-
-
-    return code;
+void readName(string &name) {
+    cout << "Enter surname (RETURN to quit): ";
+    name = getLine();
 }
 
-/* Convert one char to a specific code */
-string convertToCode(char s, Vector<string> &vec) {
-    string code = "";
-    string letters = "";
+void convertToCode(string &name, string &code, Vector<string> &table) {
+    char firstLetter = name[0];
+    string leftLetters = name.substr(1); 
+    string rowOfTable = "";
+    char upperLetter = ' '; 
 
 
-    s = toupper(s);
-    for(int i=0; i<vec.size(); i++) {
-        letters = vec.get(i);
-        for(int j=0; j<letters.length(); j++) {
-            if (letters[j] == s) {
-                code = to_string(i); // to_string(i); @ToDo
-                break;
+    code = ""; 
+
+    if(islower(firstLetter)) firstLetter = toupper(firstLetter);
+    for (int i = 0; i < leftLetters.length(); ++i)
+    {
+        upperLetter = toupper(leftLetters[i]);
+
+        for (int j = 0; j < table.size(); ++j)
+        {
+            bool found = false;
+            rowOfTable = table.get(j); 
+            for (int m = 0; m < rowOfTable.length(); ++m)
+            {
+
+                if(upperLetter == rowOfTable[m]) {
+                    found = true;
+                    break;
+                }
+            }
+            if(found) { 
+                code += to_string(j); 
+                break; 
             }
         }
-        if(code != "") break; // @ToDO relay break
+        continue;
+    }
+}
+
+void findDuplicateCode(string &code) {
+    for (int i = 1; i < code.length(); ++i)
+    {
+        if (code[i] == code[i-1]) code[i] = '0'; 
+    }
+}
+
+void removeAny0(string &code) {
+    string str = "";
+
+    for (int i = 0; i < code.length(); ++i)
+    {
+        if(code[i] != '0') str += code[i]; 
     }
 
-    return code;
+    code = str;
+}
+
+void makeCodeLength4(string &code) {
+    if(code.length() < 4) {
+        while(true) {
+            code += "0";
+            if(code.length() == 4) break;
+        }
+    } else if(code.length() > 4) { 
+        code = code.substr(0, 4);
+    }
+}
+
+void displayName(string &name, string &code) {
+    cout << "Soundex code for " << name << " is " << code << endl;
 }
