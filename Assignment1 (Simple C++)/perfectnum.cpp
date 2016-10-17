@@ -19,7 +19,7 @@ using namespace std;
 bool isPerfect(int n) {
     int sum = 0;
 
-    for(int i=1; i<n; i++) // i -> 因子
+    for(int i=1; i<n; i++) // i -> factor
         if(n%i == 0) sum += i;
 
     return n == sum ? true : false;
