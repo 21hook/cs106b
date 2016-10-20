@@ -4,7 +4,7 @@
  *
  * The sequence of .cpp files are intended for practicing theses basic concepts.
  *
- * requirement: a. relevant b. skilled
+ * requirement: a. relevant b.typical c. skilled
  *
  * topics:
  *      1. coding style: comments
