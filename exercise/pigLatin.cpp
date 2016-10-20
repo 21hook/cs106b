@@ -9,7 +9,7 @@
 
 
 string pigLatin(string word) {
-	int vp = findFirstVowel(word);
+	int vp = findFirstVowel(word); // vowel positions(a descriptive supplement for a shorthand name) 
 
 	if (vp == -1) {
 		return word;
