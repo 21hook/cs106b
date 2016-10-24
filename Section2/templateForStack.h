@@ -32,4 +32,5 @@ private:
 
 };
 
+#include "templateForStack.cpp"
 #endif
