@@ -45,6 +45,6 @@ char CharStack::pop() {
 	// specific operations 
 }
 
-char CharStack::peak() {
+char CharStack::peek() {
 	// specific operations 
 }

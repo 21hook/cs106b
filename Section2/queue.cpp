@@ -12,7 +12,7 @@ void manageQueue() {
 	Queue<string> queue;
 
 	/**
-	 * patt: loop & a half  &&  peak or endqueue
+	 * patt: loop & a half  &&  peek or endqueue
 	 */
 	 while(true) {
 	 	string response = getLine("Enter a string for queue: ");
@@ -40,7 +40,7 @@ void manageQueue() {
 	 			cout << "There is no itmes to print." << endl:
 	 			cout << "You must enter a string before print out an item." << endl;
 	 		} else {
-	 			cout << queue.peak() << endl;
+	 			cout << queue.peek() << endl;
 	 		}
 	 	} else { // add an new item of queue
 	 		queue.endqueue(response);
